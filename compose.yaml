@@ -1,0 +1,16 @@
+# Development only. Run with podman-compose from the repository root.
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Containerfile.dev
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      DJANGO_DATABASE_PATH: /data/db.sqlite3
+    volumes:
+      - ./backend:/app:ro
+      - backend-dev-data:/data
+
+volumes:
+  backend-dev-data:
